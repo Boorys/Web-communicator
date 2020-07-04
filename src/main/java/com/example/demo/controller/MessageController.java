@@ -3,23 +3,22 @@ package com.example.demo.controller;
 import com.example.demo.dto.MessageGetDto;
 import com.example.demo.dto.MessagePostDto;
 import com.example.demo.mapper.MessageMapper;
-import com.example.demo.service.MessageService;
+import com.example.demo.service.MessageServiceImpl;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
 
 @Controller
-@CrossOrigin
+@CrossOrigin("${client.url}")
 public class MessageController {
 
-    private MessageService messageService;
+    private MessageServiceImpl messageServiceImpl;
     private MessageMapper messageMapper;
 
-    public MessageController(MessageService messageService, MessageMapper messageMapper) {
-        this.messageService = messageService;
+    public MessageController(MessageServiceImpl messageServiceImpl, MessageMapper messageMapper) {
+        this.messageServiceImpl = messageServiceImpl;
         this.messageMapper = messageMapper;
     }
 
@@ -30,7 +29,7 @@ public class MessageController {
     public MessageGetDto greeting(@DestinationVariable String id, @RequestBody MessagePostDto messagePostDto) throws Exception {
 
         MessageGetDto messageGetDto = messageMapper.messagePostDtoToMessageGetDto(messagePostDto);
-        messageService.addMessage(messagePostDto);
+        messageServiceImpl.addMessage(messagePostDto);
         return messageGetDto;
 
     }

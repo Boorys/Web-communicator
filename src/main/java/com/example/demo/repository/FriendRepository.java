@@ -13,7 +13,6 @@ public interface FriendRepository extends JpaRepository<FriendEntity, Long> {
 
     FriendEntity findFriendEntityById(long id);
 
-
     @Query(value="select * from (\n" +
             "select u_e.first_name, fe.id as friend_id , u_e.user_id user_id_friend,ue.user_id from user_entity as ue join friend_entity as fe on ue.id = fe.owner_id\n" +
             "join user_entity as u_e on u_e.id = fe.friend_id\n" +

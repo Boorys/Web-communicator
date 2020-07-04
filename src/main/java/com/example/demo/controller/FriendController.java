@@ -1,23 +1,26 @@
 package com.example.demo.controller;
 
-import com.example.demo.service.FriendService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.demo.dto.FriendGetDto;
+import com.example.demo.service.FriendServiceImpl;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin
+@CrossOrigin("${client.url}")
 public class FriendController {
 
-    @Autowired
-    FriendService friendService;
+
+    private FriendServiceImpl friendServiceImpl;
+
+    public FriendController(FriendServiceImpl friendServiceImpl) {
+        this.friendServiceImpl = friendServiceImpl;
+    }
 
     @GetMapping(path = "/get/friends/{userId}")
-    List getFriend(@PathVariable String userId) {
+    @ResponseStatus(value = HttpStatus.OK)
+    List<FriendGetDto> getFriend(@PathVariable String userId) {
 
-        return friendService.getFriend(userId);
+        return friendServiceImpl.getFriend(userId);
     }
 }

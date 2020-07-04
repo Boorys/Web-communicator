@@ -18,7 +18,6 @@ public class FriendEntity {
     @ManyToOne()
     private UserEntity friend;
 
-    @Column()
     private boolean isActive;
 
     @OneToMany(mappedBy = "friend",fetch = FetchType.EAGER)

@@ -17,13 +17,8 @@ public class MessageEntity {
     @ManyToOne()
     private FriendEntity friend;
 
-    @Column()
     private String date;
-
-    @Column()
     private String textMessage;
-
-    @Column()
     private String userId;
 
     public MessageEntity(){

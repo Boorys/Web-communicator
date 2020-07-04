@@ -3,11 +3,8 @@ package com.example.demo.dto;
 
 public class FriendPostDto {
 
-
     private String myId;
-
     private String friendId;
-
 
     public String getMyId() {
         return myId;
